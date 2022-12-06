@@ -73,7 +73,7 @@ const GetLocation = ({ navigation }) => {
       setValidationerror("please click button to fill the location");
       return;
     }
-    setDoc(doc(db, "users4", "LA"), {
+    setDoc(doc(db, "user1", "LA"), {
       location: location,
       latitude: latitude,
       longitude: longitude,
@@ -119,50 +119,54 @@ const GetLocation = ({ navigation }) => {
   //     }
   // }
   return (
-    <ScrollView>
-      <View style={styles.mainContainer}>
-        <View style={styles.responsiveBox}>
-          <Text style={styles.mainHeader}>Location Information</Text>
-          <GeoLocation
-            setLocation={setLocation}
-            setLatitude={setLatitude}
-            setLongitude={setLongitude}
-          />
+    <KeyboardAvoidingView>
+      <ScrollView>
+        <View style={styles.mainContainer}>
+          <View style={styles.responsiveBox}>
+            <Text style={styles.mainHeader}>Location Information</Text>
+            <GeoLocation
+              setLocation={setLocation}
+              setLatitude={setLatitude}
+              setLongitude={setLongitude}
+            />
 
-          <Text style={styles.Address}>
-            {location} {latitude} {longitude}
-          </Text>
-          {validationerror && (
+            <Text style={styles.Address}>
+              {location} {latitude} {longitude}
+            </Text>
+            {validationerror && (
+              <View>
+                <Text style={styles.validationerror}>{validationerror}</Text>
+              </View>
+            )}
+
             <View>
-              <Text style={styles.validationerror}>{validationerror}</Text>
+              <Text style={styles.helper}>
+                Press the link below for the help
+              </Text>
             </View>
-          )}
-
-          <View>
-            <Text style={styles.helper}>Press the link below for the help</Text>
+            <TouchableOpacity
+              style={[
+                styles.buttonStyle,
+                {
+                  backgroundColor: "red",
+                  marginTop: 30,
+                  marginBottom: 60,
+                  marginHorizontal: 10,
+                  borderRadius: 10,
+                },
+              ]}
+              onPress={() => {
+                Submit();
+                sendPushNotification(expoPushToken);
+                registerForPushNotificationsAsync();
+              }}
+            >
+              <Text style={styles.login}>Please save me</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={[
-              styles.buttonStyle,
-              {
-                backgroundColor: "red",
-                marginTop: 30,
-                marginBottom: 60,
-                marginHorizontal: 10,
-                borderRadius: 10,
-              },
-            ]}
-            onPress={() => {
-              Submit();
-              sendPushNotification(expoPushToken);
-              registerForPushNotificationsAsync();
-            }}
-          >
-            <Text style={styles.login}>Please save me</Text>
-          </TouchableOpacity>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -225,7 +229,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingTop: 40,
     backgroundColor: "white",
-    marginBottom: 70,
+    marginBottom: 60,
   },
   mainHeader: {
     fontSize: 25,
@@ -310,7 +314,7 @@ const styles = StyleSheet.create({
   },
   responsiveBox: {
     width: wp("80%"),
-    height: hp("90%"),
+    height: hp("81%"),
     // borderWidth: 2,
     // borderColor: 'orange',
     flexDirection: "column",

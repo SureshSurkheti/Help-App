@@ -86,7 +86,6 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView>
         <View style={styles.mainContainer}>
           <View style={styles.responsiveBox}>
-            <Text style={styles.mainHeader}>Information Form</Text>
             <View style={styles.inputContainer}>
               <Text style={styles.labels}>Enter your name:</Text>
               <TextInput
@@ -199,16 +198,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginBottom: 60,
   },
-  mainHeader: {
-    fontSize: 25,
-    color: "black",
-    fontWeight: "bold",
-    paddingBottom: 15,
-    textTransform: "capitalize",
-    textAlign: "center",
-    marginVertical: -20,
-    marginTop: 30,
-  },
+
   inputContainer: {
     fontSize: 10,
   },
@@ -238,7 +228,7 @@ const styles = StyleSheet.create({
   //   },
   responsiveBox: {
     width: wp("80%"),
-    height: hp("92%"),
+    height: hp("81%"),
     // borderWidth: 2,
     // borderColor: 'orange',
     flexDirection: "column",

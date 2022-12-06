@@ -17,34 +17,37 @@ import {
 const HelpComing = ({ navigation }) => {
   const Submit = () => {
     Alert.alert(`Processed successfully`);
+    navigation.navigate("HomeScreen");
   };
   return (
-    <ScrollView style={styles.scrollStyle}>
-      <View style={styles.mainContainer}>
-        <View style={styles.responsiveBox}>
-          <Text style={styles.mainHeader}>
-            Be patience help is coming please send the Patient's Detail....
-          </Text>
-          <View>
-            <TouchableOpacity
-              style={[
-                styles.buttonStyle,
-                {
-                  backgroundColor: "red",
-                  marginTop: 160,
-                  marginLeft: 35,
-                  marginRight: 35,
-                  borderRadius: 10,
-                },
-              ]}
-              onPress={() => Submit()}
-            >
-              <Text style={styles.login}>OK</Text>
-            </TouchableOpacity>
+    <KeyboardAvoidingView>
+      <ScrollView style={styles.scrollStyle}>
+        <View style={styles.mainContainer}>
+          <View style={styles.responsiveBox}>
+            <Text style={styles.mainHeader}>
+              Be patience help is coming please send the Patient's Detail....
+            </Text>
+            <View>
+              <TouchableOpacity
+                style={[
+                  styles.buttonStyle,
+                  {
+                    backgroundColor: "red",
+                    marginTop: 160,
+                    marginLeft: 35,
+                    marginRight: 35,
+                    borderRadius: 10,
+                  },
+                ]}
+                onPress={() => Submit()}
+              >
+                <Text style={styles.login}>OK</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
   },
   mainHeader: {
     fontSize: 25,
-    color: "green",
+    color: "black",
     fontWeight: "bold",
     paddingTop: 20,
     paddingBottom: 15,
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
   },
   responsiveBox: {
     width: wp("80%"),
-    height: hp("90%"),
+    height: hp("81%"),
     // borderWidth: 2,
     // borderColor: 'orange',
     flexDirection: "column",

@@ -29,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
       Alert.alert(`Loged in successfully`);
     }
 
-    setDoc(doc(db, "users2", "LA"), {
+    setDoc(doc(db, "user1", "LA"), {
       id: id,
       date: date,
     });
@@ -42,10 +42,9 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView>
-      <ScrollView style={styles.scrollStyle}>
+      <ScrollView>
         <View style={styles.mainContainer}>
           <View style={styles.responsiveBox}>
-            <Text style={styles.mainHeader}>login</Text>
             <View style={styles.inputContainer}>
               <Text style={styles.labels}>Enter your ID:</Text>
               <TextInput
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     height: "100%",
     paddingHorizontal: 30,
-    paddingTop: 40,
+    paddingTop: 60,
     backgroundColor: "white",
     marginBottom: 60,
   },
@@ -125,7 +124,6 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     textTransform: "capitalize",
     textAlign: "center",
-    marginTop: 30,
   },
   inputContainer: {
     fontSize: 10,
@@ -168,7 +166,7 @@ const styles = StyleSheet.create({
   },
   responsiveBox: {
     width: wp("80%"),
-    height: hp("92%"),
+    height: hp("81%"),
     // borderWidth: 2,
     // borderColor: 'orange',
     flexDirection: "column",

@@ -80,7 +80,7 @@ const GooglePlacesInput = ({ navigation }) => {
       setValidationerror("please select the location");
       return;
     }
-    setDoc(doc(db, "users3", "LA"), {
+    setDoc(doc(db, "user1", "LA"), {
       input: input,
     });
     navigation.navigate("GetLocation");
@@ -105,7 +105,7 @@ const GooglePlacesInput = ({ navigation }) => {
         }}
         onPress={(data, details) => console.log(data, details)}
         textInputProps={{
-          marginTop: 60,
+          marginTop: 30,
           marginHorizontal: 10,
           borderRadius: 5,
           borderWidth: 1,

@@ -19,31 +19,107 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="HomeScreen">
-          <Stack.Screen options={{ headerShown: false }} name="HomeScreen">
-            {(props) => <HomeScreen {...props} channelName={"application"} />}
-          </Stack.Screen>
-          <Stack.Screen options={{ headerShown: false }} name="LoginScreen">
-            {(props) => <LoginScreen {...props} channelName={"application"} />}
-          </Stack.Screen>
-          <Stack.Screen options={{ headerShown: false }} name="GetLocation">
-            {(props) => <GetLocation {...props} channelName={"application"} />}
-          </Stack.Screen>
-          <Stack.Screen options={{ headerShown: false }} name="HelpComing">
-            {(props) => <HelpComing {...props} channelName={"application"} />}
-          </Stack.Screen>
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{
+              title: "Information Form",
+              headerStyle: {
+                display: "flex",
+                backgroundColor: "#F4511E",
+              },
+              headerTintColor: "black",
+              fontWeight: "bold",
+              headerTitleAlign: "center",
+              headerTitleStyle: {
+                fontWeight: "bold",
+                textAlign: "center",
+                fontSize: 23,
+              },
+            }}
+          />
+
+          <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{
+              title: "Login Form",
+              headerStyle: {
+                display: "flex",
+                backgroundColor: "#F4511E",
+              },
+              headerTintColor: "black",
+              fontWeight: "bold",
+              headerTitleAlign: "center",
+              headerTitleStyle: {
+                fontWeight: "bold",
+                textAlign: "center",
+                fontSize: 23,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="GetLocation"
+            component={GetLocation}
+            options={{
+              title: "Get the location",
+              headerStyle: {
+                display: "flex",
+                backgroundColor: "#F4511E",
+              },
+              headerTintColor: "black",
+              fontWeight: "bold",
+              headerTitleAlign: "center",
+              headerTitleStyle: {
+                fontWeight: "bold",
+                textAlign: "center",
+                fontSize: 23,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="HelpComing"
+            component={HelpComing}
+            options={{
+              title: "Help Coming",
+              headerStyle: {
+                display: "flex",
+                backgroundColor: "#F4511E",
+              },
+              headerTintColor: "black",
+              fontWeight: "bold",
+              headerTitleAlign: "center",
+              headerTitleStyle: {
+                fontWeight: "bold",
+                textAlign: "center",
+                fontSize: 23,
+              },
+            }}
+          />
           <Stack.Screen options={{ headerShown: false }} name="PatientDetail">
             {(props) => (
               <PatientDetail {...props} channelName={"application"} />
             )}
           </Stack.Screen>
           <Stack.Screen
-            options={{ headerShown: false }}
             name="GooglePlacesInput"
-          >
-            {(props) => (
-              <GooglePlacesInput {...props} channelName={"application"} />
-            )}
-          </Stack.Screen>
+            component={GooglePlacesInput}
+            options={{
+              title: "Get the location",
+              headerStyle: {
+                display: "flex",
+                backgroundColor: "#F4511E",
+              },
+              headerTintColor: "black",
+              fontWeight: "bold",
+              headerTitleAlign: "center",
+              headerTitleStyle: {
+                fontWeight: "bold",
+                textAlign: "center",
+                fontSize: 23,
+              },
+            }}
+          />
           <Stack.Screen options={{ headerShown: false }} name="firebase">
             {(props) => <firebase {...props} channelName={"application"} />}
           </Stack.Screen>
@@ -61,5 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     flexDirection: "column",
+    textAlign: "center",
+    backgroundColor: "red",
   },
 });
