@@ -32,7 +32,7 @@ const HelpComing = ({ navigation }) => {
                 style={[
                   styles.buttonStyle,
                   {
-                    backgroundColor: "red",
+                    backgroundColor: "#F4511E",
                     marginTop: 160,
                     marginLeft: 35,
                     marginRight: 35,

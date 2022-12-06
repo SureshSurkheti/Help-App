@@ -82,7 +82,7 @@ const LoginScreen = ({ navigation }) => {
               style={[
                 styles.buttonStyle,
                 {
-                  backgroundColor: "red",
+                  backgroundColor: "#F4511E",
                   marginTop: 35,
                   marginLeft: 35,
                   marginRight: 35,

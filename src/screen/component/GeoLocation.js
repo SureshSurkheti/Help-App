@@ -39,7 +39,7 @@ const GeoLocation = ({ setLocation, setLatitude, setLongitude }) => {
         style={[
           styles.buttonStyle,
           {
-            backgroundColor: "red",
+            backgroundColor: "#F4511E",
             marginHorizontal: 10,
             borderRadius: 10,
             marginTop: 20,

@@ -148,7 +148,7 @@ const GetLocation = ({ navigation }) => {
               style={[
                 styles.buttonStyle,
                 {
-                  backgroundColor: "red",
+                  backgroundColor: "#F4511E",
                   marginTop: 30,
                   marginBottom: 60,
                   marginHorizontal: 10,
@@ -272,6 +272,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     paddingVertical: 10,
+    color: "white",
   },
 
   helper: {

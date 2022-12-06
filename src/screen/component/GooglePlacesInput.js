@@ -125,7 +125,7 @@ const GooglePlacesInput = ({ navigation }) => {
           style={[
             styles.buttonStyle,
             {
-              backgroundColor: "red",
+              backgroundColor: "#F4511E",
               marginBottom: 15,
               marginHorizontal: 20,
               borderRadius: 10,
