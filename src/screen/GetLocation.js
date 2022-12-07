@@ -73,7 +73,7 @@ const GetLocation = ({ navigation }) => {
       setValidationerror("please click button to fill the location");
       return;
     }
-    setDoc(doc(db, "user1", "LA"), {
+    setDoc(doc(db, "patientList", "detail"), {
       location: location,
       latitude: latitude,
       longitude: longitude,

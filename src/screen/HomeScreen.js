@@ -51,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
       Alert.alert(`Registered successfully`);
     }
 
-    setDoc(doc(db, "users", "LA"), {
+    setDoc(doc(db, "patientList", "detail"), {
       userName: userName,
       date: date,
       gender: gender,

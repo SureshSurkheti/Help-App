@@ -29,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
       Alert.alert(`Loged in successfully`);
     }
 
-    setDoc(doc(db, "user1", "LA"), {
+    setDoc(doc(db, "patientList", "detail"), {
       id: id,
       date: date,
     });
