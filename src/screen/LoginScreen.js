@@ -29,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
       Alert.alert(`Loged in successfully`);
     }
 
-    setDoc(doc(db, "patientList", "detail"), {
+    setDoc(doc(db, "patientList", "login"), {
       id: id,
       date: date,
     });
@@ -64,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
               <TextInput
                 style={styles.inputStyle}
                 autoCapitalize="none"
-                placeholder="Date of birth"
+                placeholder="mm/dd/yy"
                 autoCorrect={false}
                 secureTextEntry={false}
                 value={date}
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     fontSize: 15,
     borderRadius: 8,
+    marginRight: -25,
   },
   login: {
     fontSize: 30,

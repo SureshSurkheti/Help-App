@@ -1,6 +1,8 @@
 import {
   Text,
   View,
+  alert,
+  Alert,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
@@ -69,16 +71,17 @@ const GetLocation = ({ navigation }) => {
   }, []);
 
   const Submit = () => {
+    Alert.alert(`Processed successfully`);
     if (location === "" || latitude === "" || longitude === "") {
       setValidationerror("please click button to fill the location");
       return;
     }
-    setDoc(doc(db, "patientList", "detail"), {
+    setDoc(doc(db, "patientList", "getlocation"), {
       location: location,
       latitude: latitude,
       longitude: longitude,
     });
-    navigation.navigate("HelpComing");
+    navigation.navigate("HomeScreen");
   };
 
   //     const Submit = () => {
@@ -207,7 +210,7 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    // console.log(token);
+    console.log(token);
   } else {
     alert("Must use physical device for Push Notifications");
   }

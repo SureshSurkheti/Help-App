@@ -77,7 +77,7 @@ export default function App() {
               },
             }}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="HelpComing"
             component={HelpComing}
             options={{
@@ -95,7 +95,7 @@ export default function App() {
                 fontSize: 23,
               },
             }}
-          />
+          /> */}
           <Stack.Screen options={{ headerShown: false }} name="PatientDetail">
             {(props) => (
               <PatientDetail {...props} channelName={"application"} />

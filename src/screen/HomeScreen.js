@@ -28,6 +28,8 @@ import {
 } from "react-native-responsive-screen";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { CheckBox } from "react-native-elements";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const HomeScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
@@ -37,13 +39,15 @@ const HomeScreen = ({ navigation }) => {
   const [address, setAddress] = useState("");
   const [validationerror, setValidationerror] = useState("");
 
+
   const Submit = () => {
     if (
       userName.trim() === "" ||
       date.trim() === "" ||
       gender.trim() === "" ||
       number.trim() === "" ||
-      address.trim() === ""
+      address.trim() === "" 
+      
     ) {
       setValidationerror("please fill all the fields");
       return;
@@ -60,6 +64,11 @@ const HomeScreen = ({ navigation }) => {
     });
     navigation.navigate("LoginScreen");
   };
+  const Login = () => {
+    navigation.navigate("LoginScreen");
+  };
+
+
 
   // const Submit = () => {
   //     if(userName === "suresh" && date === "2055/11/27" && gender === "male" && number === "9803501277" && address === "gorkha"){
@@ -79,7 +88,6 @@ const HomeScreen = ({ navigation }) => {
   });
   // if (! fontLoaded) {
   //     <AppLoading/>;
-  // }
 
   return (
     <KeyboardAvoidingView>
@@ -101,11 +109,61 @@ const HomeScreen = ({ navigation }) => {
               />
             </View>
             <View style={styles.inputContainer}>
+              <Text style={styles.labels}>Select your gender:</Text>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 23, marginBottom:-10 }}>
+                <CheckBox 
+                checkedColor="red"
+                title="Male"
+                  center
+                  checked={gender === "male"}
+                  checkedIcon="dot-circle-o"
+                onPress={() => {
+                  setGender("male");
+                }}
+                />
+                <CheckBox
+                checkedColor="red"
+                 title="Female"
+                  center
+                  checked={gender === "female"}
+                  checkedIcon="dot-circle-o"
+                  onPress={() => {
+                    setGender("female");
+                  }}
+                />
+                <CheckBox 
+                checkedColor="red"
+                title="Other"
+                  center
+                  checked={gender === "other"}
+                  checkedIcon="dot-circle-o"
+                  onPress={() => {
+                    setGender("other");
+                  }}
+                />
+              </View>
+             
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.labels}>Enter your address:</Text>
+              <TextInput
+                style={styles.inputStyle}
+                autoCapitalize="none"
+                placeholder="Address"
+                autoCorrect={false}
+                secureTextEntry={false}
+                value={address}
+                onChangeText={(address) => {
+                  setAddress(address);
+                }}
+              />
+            </View>
+            <View style={styles.inputContainer}>
               <Text style={styles.labels}>Enter your date of birth:</Text>
               <TextInput
                 style={styles.inputStyle}
                 autoCapitalize="none"
-                placeholder="DOB"
+                placeholder="mm/dd/yy"
                 keyboardType="phone-pad"
                 maxLength={10}
                 autoCorrect={false}
@@ -116,20 +174,7 @@ const HomeScreen = ({ navigation }) => {
                 }}
               />
             </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.labels}>Enter your gender:</Text>
-              <TextInput
-                style={styles.inputStyle}
-                autoCapitalize="none"
-                placeholder="Gender"
-                autoCorrect={false}
-                secureTextEntry={false}
-                value={gender}
-                onChangeText={(gender) => {
-                  setGender(gender);
-                }}
-              />
-            </View>
+         
             <View style={styles.inputContainer}>
               <Text style={styles.labels}>Enter your mobile number:</Text>
               <TextInput
@@ -147,26 +192,22 @@ const HomeScreen = ({ navigation }) => {
                 }}
               />
             </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.labels}>Enter your address:</Text>
-              <TextInput
-                style={styles.inputStyle}
-                autoCapitalize="none"
-                placeholder="Address"
-                autoCorrect={false}
-                secureTextEntry={false}
-                value={address}
-                onChangeText={(address) => {
-                  setAddress(address);
-                }}
-              />
-            </View>
+           
+            
             {validationerror && (
               <View>
                 <Text style={styles.validationerror}>{validationerror}</Text>
               </View>
             )}
-
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={styles.registered}>Already registered?? </Text>
+              <TouchableOpacity
+              
+                onPress={() => Login()}
+              >
+                <Text style={styles.logic}>Login</Text>
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity
               style={[
                 styles.buttonStyle,
@@ -183,6 +224,7 @@ const HomeScreen = ({ navigation }) => {
             >
               <Text style={styles.login}>Press Here</Text>
             </TouchableOpacity>
+
           </View>
         </View>
       </ScrollView>
@@ -216,6 +258,7 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     fontSize: 15,
     borderRadius: 8,
+    marginRight: -22,
   },
   login: {
     fontSize: 30,
@@ -238,6 +281,19 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 16,
   },
+  registered: {
+    fontSize: 17,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  logic: {
+    color: "blue",
+    fontSize: 17,
+  },
+  CheckBox: {
+    alignSelf: "center",
+    backgroundColor: "white",
+  }
 });
 
 export default HomeScreen;
