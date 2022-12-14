@@ -62,48 +62,50 @@ import {
   StyleSheet,
   onChangeNumber,
   number,
+  Alert,
   TouchableOpacity,
   KeyboardAvoidingView,
   FlatList,
 } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { doc, setDoc } from "firebase/firestore";
-// import { db, doc, setDoc } from "../../firebase";
+import { db } from "../../../firebase";
 
 const GooglePlacesInput = ({ navigation }) => {
-  const [input, setInput] = useState("");
+  const [autocomplete, setAutocomplete] = useState("");
   const [validationerror, setValidationerror] = useState("");
 
   const Submit = () => {
-    console.log(input);
-    if (input === "") {
+    if (autocomplete === "") {
       setValidationerror("please select the location");
       return;
+    }else {
+      Alert.alert(`location completed successfully`);
     }
-    setDoc(doc(db, "user1", "LA"), {
-      input: input,
+    setDoc(doc(db, "patientList", "inputlocation"), {
+      autocomplete: autocomplete,
     });
     navigation.navigate("GetLocation");
   };
   const Skip = () => {
     navigation.navigate("GetLocation");
   };
+
+  console.log(autocomplete);
+
   return (
     <View style={styles.container}>
       <GooglePlacesAutocomplete
         TextInput
         style={styles.input}
-        value={number}
-        onChangeText={(input) => {
-          setInput(input);
-        }}
+       
         placeholder="Enter the location"
         keyboardType="numeric"
         query={{
-          key: "AIzaSyCMANyWvjcYxwagcf0NNch5rJEGrNTMmvg",
+          key: "AIzaSyATDvsSSy3CbZZw9Dc3mnibgWWZF7M7eHc",
           language: "en", // language of the results
         }}
-        onPress={(data, details) => console.log(data, details)}
+        onPress={(data, details) => setAutocomplete({data, details})}
         textInputProps={{
           marginTop: 30,
           marginHorizontal: 10,
@@ -131,7 +133,8 @@ const GooglePlacesInput = ({ navigation }) => {
               borderRadius: 10,
             },
           ]}
-          onPress={() => Submit()}
+          onPress={() =>  Submit()
+          }
         >
           <Text style={styles.login}>Confirm</Text>
         </TouchableOpacity>

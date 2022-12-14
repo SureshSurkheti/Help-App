@@ -16,6 +16,7 @@ import {
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
+
 const LoginScreen = ({ navigation }) => {
   const [id, setId] = useState("");
   const [date, setDate] = useState("");

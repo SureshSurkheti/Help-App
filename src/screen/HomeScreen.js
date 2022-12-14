@@ -26,10 +26,13 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { CheckBox } from "react-native-elements";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import firestore from '@react-native-firebase/firestore';
+import { async } from "@firebase/util";
+
+
 
 const HomeScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
@@ -46,16 +49,33 @@ const HomeScreen = ({ navigation }) => {
       date.trim() === "" ||
       gender.trim() === "" ||
       number.trim() === "" ||
-      address.trim() === "" 
+      address.trim() === ""
       
+
     ) {
       setValidationerror("please fill all the fields");
       return;
     } else {
       Alert.alert(`Registered successfully`);
     }
+//     uploadData();
+// const uploadData = () => {
+//     firestore()
+//     .collection('information'
+//     .add({
+//       userName: userName,
+//       date: date,
+//       gender: gender,
+//       number: number,
+//       address: address,
+//     })
+//     .then(() => {
+//       console.log('User added!');
+//     }));
+//   };
+const onSend = async () => {
 
-    setDoc(doc(db, "patientList", "detail"), {
+   await   setDoc(collection(firestore, "nepal"), {
       userName: userName,
       date: date,
       gender: gender,
@@ -64,11 +84,24 @@ const HomeScreen = ({ navigation }) => {
     });
     navigation.navigate("LoginScreen");
   };
+};
   const Login = () => {
     navigation.navigate("LoginScreen");
   };
+  
 
-
+  // firestore()
+  // .collection('Users')
+  // .add({
+  //   userName: userName,
+  //     date: date,
+  //     gender: gender,
+  //     number: number,
+  //     address: address,
+  // })
+  // .then(() => {
+  //   console.log('User added!');
+  // });
 
   // const Submit = () => {
   //     if(userName === "suresh" && date === "2055/11/27" && gender === "male" && number === "9803501277" && address === "gorkha"){
@@ -110,20 +143,20 @@ const HomeScreen = ({ navigation }) => {
             </View>
             <View style={styles.inputContainer}>
               <Text style={styles.labels}>Select your gender:</Text>
-              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 23, marginBottom:-10 }}>
-                <CheckBox 
-                checkedColor="red"
-                title="Male"
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 23, marginBottom: -10 }}>
+                <CheckBox
+                  checkedColor="red"
+                  title="Male"
                   center
                   checked={gender === "male"}
                   checkedIcon="dot-circle-o"
-                onPress={() => {
-                  setGender("male");
-                }}
+                  onPress={() => {
+                    setGender("male");
+                  }}
                 />
                 <CheckBox
-                checkedColor="red"
-                 title="Female"
+                  checkedColor="red"
+                  title="Female"
                   center
                   checked={gender === "female"}
                   checkedIcon="dot-circle-o"
@@ -131,9 +164,9 @@ const HomeScreen = ({ navigation }) => {
                     setGender("female");
                   }}
                 />
-                <CheckBox 
-                checkedColor="red"
-                title="Other"
+                <CheckBox
+                  checkedColor="red"
+                  title="Other"
                   center
                   checked={gender === "other"}
                   checkedIcon="dot-circle-o"
@@ -142,7 +175,7 @@ const HomeScreen = ({ navigation }) => {
                   }}
                 />
               </View>
-             
+
             </View>
             <View style={styles.inputContainer}>
               <Text style={styles.labels}>Enter your address:</Text>
@@ -174,7 +207,7 @@ const HomeScreen = ({ navigation }) => {
                 }}
               />
             </View>
-         
+
             <View style={styles.inputContainer}>
               <Text style={styles.labels}>Enter your mobile number:</Text>
               <TextInput
@@ -192,8 +225,8 @@ const HomeScreen = ({ navigation }) => {
                 }}
               />
             </View>
-           
-            
+
+
             {validationerror && (
               <View>
                 <Text style={styles.validationerror}>{validationerror}</Text>
@@ -202,7 +235,7 @@ const HomeScreen = ({ navigation }) => {
             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
               <Text style={styles.registered}>Already registered?? </Text>
               <TouchableOpacity
-              
+
                 onPress={() => Login()}
               >
                 <Text style={styles.logic}>Login</Text>
@@ -220,7 +253,10 @@ const HomeScreen = ({ navigation }) => {
                   marginBottom: 20,
                 },
               ]}
-              onPress={() => Submit()}
+              onPress={() => {Submit();
+                onSend();
+                }
+              }
             >
               <Text style={styles.login}>Press Here</Text>
             </TouchableOpacity>
