@@ -15,7 +15,7 @@ import {
 } from "react-native-responsive-screen";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = ({ navigation }) => {
   const [id, setId] = useState("");

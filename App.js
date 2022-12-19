@@ -25,8 +25,10 @@ export default function App() {
             options={{
               title: "Information Form",
               headerStyle: {
+                height: 30,
                 display: "flex",
                 backgroundColor: "#F4511E",
+                headerTintHeight: 60,
               },
               headerTintColor: "black",
               fontWeight: "bold",
@@ -113,6 +115,7 @@ export default function App() {
               headerTintColor: "black",
               fontWeight: "bold",
               headerTitleAlign: "center",
+
               headerTitleStyle: {
                 fontWeight: "bold",
                 textAlign: "center",

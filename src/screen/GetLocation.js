@@ -27,6 +27,7 @@ import { db } from "../../firebase";
 // import * as Location from "expo-location";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,

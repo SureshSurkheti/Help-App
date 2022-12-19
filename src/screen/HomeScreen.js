@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useFonts,
   Montserrat_300Light,
@@ -26,13 +26,20 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { collection, doc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import {
+  addDoc,
+  doc,
+  getDocs,
+  QuerySnapshot,
+  setDoc,
+  collection,
+} from "firebase/firestore";
+import { db, auth } from "../../firebase";
 import { CheckBox } from "react-native-elements";
-import firestore from '@react-native-firebase/firestore';
+import firestore from "@react-native-firebase/firestore";
 import { async } from "@firebase/util";
-
-
+import { getFirestore } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
@@ -42,7 +49,6 @@ const HomeScreen = ({ navigation }) => {
   const [address, setAddress] = useState("");
   const [validationerror, setValidationerror] = useState("");
 
-
   const Submit = () => {
     if (
       userName.trim() === "" ||
@@ -50,67 +56,30 @@ const HomeScreen = ({ navigation }) => {
       gender.trim() === "" ||
       number.trim() === "" ||
       address.trim() === ""
-      
-
     ) {
       setValidationerror("please fill all the fields");
       return;
     } else {
       Alert.alert(`Registered successfully`);
     }
-//     uploadData();
-// const uploadData = () => {
-//     firestore()
-//     .collection('information'
-//     .add({
-//       userName: userName,
-//       date: date,
-//       gender: gender,
-//       number: number,
-//       address: address,
-//     })
-//     .then(() => {
-//       console.log('User added!');
-//     }));
-//   };
-const onSend = async () => {
 
-   await   setDoc(collection(firestore, "nepal"), {
+    navigation.navigate("LoginScreen");
+  };
+
+  const addData = async () => {
+    const docRef = await addDoc(collection(db, "users"), {
       userName: userName,
       date: date,
       gender: gender,
-      number: number,
       address: address,
+      number: number,
     });
-    navigation.navigate("LoginScreen");
+    console.log("Document written with ID:", docRef.id);
   };
-};
+
   const Login = () => {
     navigation.navigate("LoginScreen");
   };
-  
-
-  // firestore()
-  // .collection('Users')
-  // .add({
-  //   userName: userName,
-  //     date: date,
-  //     gender: gender,
-  //     number: number,
-  //     address: address,
-  // })
-  // .then(() => {
-  //   console.log('User added!');
-  // });
-
-  // const Submit = () => {
-  //     if(userName === "suresh" && date === "2055/11/27" && gender === "male" && number === "9803501277" && address === "gorkha"){
-  //     Alert.alert(`thank you`);
-  //     navigation.navigate("LoginScreen");
-  // } else {
-  //     Alert.alert(`address is not correct`);
-  // }
-  // };
 
   let [fontLoaded, error] = useFonts({
     Montserrat_400Regular,
@@ -119,8 +88,6 @@ const onSend = async () => {
     JosefinSans_400Regular,
     JosefinSans_900Medium,
   });
-  // if (! fontLoaded) {
-  //     <AppLoading/>;
 
   return (
     <KeyboardAvoidingView>
@@ -143,7 +110,15 @@ const onSend = async () => {
             </View>
             <View style={styles.inputContainer}>
               <Text style={styles.labels}>Select your gender:</Text>
-              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 23, marginBottom: -10 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginLeft: 23,
+                  marginBottom: -10,
+                }}
+              >
                 <CheckBox
                   checkedColor="red"
                   title="Male"
@@ -175,7 +150,6 @@ const onSend = async () => {
                   }}
                 />
               </View>
-
             </View>
             <View style={styles.inputContainer}>
               <Text style={styles.labels}>Enter your address:</Text>
@@ -226,18 +200,20 @@ const onSend = async () => {
               />
             </View>
 
-
             {validationerror && (
               <View>
                 <Text style={styles.validationerror}>{validationerror}</Text>
               </View>
             )}
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <Text style={styles.registered}>Already registered?? </Text>
-              <TouchableOpacity
-
-                onPress={() => Login()}
-              >
+              <TouchableOpacity onPress={() => Login()}>
                 <Text style={styles.logic}>Login</Text>
               </TouchableOpacity>
             </View>
@@ -253,14 +229,13 @@ const onSend = async () => {
                   marginBottom: 20,
                 },
               ]}
-              onPress={() => {Submit();
-                onSend();
-                }
-              }
+              onPress={() => {
+                Submit();
+                addData();
+              }}
             >
               <Text style={styles.login}>Press Here</Text>
             </TouchableOpacity>
-
           </View>
         </View>
       </ScrollView>
@@ -329,7 +304,7 @@ const styles = StyleSheet.create({
   CheckBox: {
     alignSelf: "center",
     backgroundColor: "white",
-  }
+  },
 });
 
 export default HomeScreen;

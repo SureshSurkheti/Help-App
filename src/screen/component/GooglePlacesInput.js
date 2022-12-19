@@ -70,6 +70,7 @@ import {
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GooglePlacesInput = ({ navigation }) => {
   const [autocomplete, setAutocomplete] = useState("");
@@ -79,7 +80,7 @@ const GooglePlacesInput = ({ navigation }) => {
     if (autocomplete === "") {
       setValidationerror("please select the location");
       return;
-    }else {
+    } else {
       Alert.alert(`location completed successfully`);
     }
     setDoc(doc(db, "patientList", "inputlocation"), {
@@ -98,14 +99,13 @@ const GooglePlacesInput = ({ navigation }) => {
       <GooglePlacesAutocomplete
         TextInput
         style={styles.input}
-       
         placeholder="Enter the location"
         keyboardType="numeric"
         query={{
           key: "AIzaSyATDvsSSy3CbZZw9Dc3mnibgWWZF7M7eHc",
           language: "en", // language of the results
         }}
-        onPress={(data, details) => setAutocomplete({data, details})}
+        onPress={(data, details) => setAutocomplete({ data, details })}
         textInputProps={{
           marginTop: 30,
           marginHorizontal: 10,
@@ -133,8 +133,7 @@ const GooglePlacesInput = ({ navigation }) => {
               borderRadius: 10,
             },
           ]}
-          onPress={() =>  Submit()
-          }
+          onPress={() => Submit()}
         >
           <Text style={styles.login}>Confirm</Text>
         </TouchableOpacity>
